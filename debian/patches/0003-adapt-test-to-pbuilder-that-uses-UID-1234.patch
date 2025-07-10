@@ -1,0 +1,87 @@
+From: Tzafrir Cohen <tzafrir@debian.org>
+Date: Fri, 16 May 2014 09:19:29 +0300
+Subject: adapt test to pbuilder, that uses UID 1234
+
+---
+ tests/config_login.defs | 16 ++++++++--------
+ tests/config_test.c     | 14 +++++++-------
+ tests/config_test.py    |  4 ++--
+ 3 files changed, 17 insertions(+), 17 deletions(-)
+
+diff --git a/tests/config_login.defs b/tests/config_login.defs
+index c428352..4f2b0b8 100644
+--- a/tests/config_login.defs
++++ b/tests/config_login.defs
+@@ -1,12 +1,12 @@
+ THIS_VARIABLE_IS_UNKNOWN !@#$%
+-GID_MIN		1234
++GID_MIN		2234
+ MAIL_DIR	/mail/dir/value
+ MD5_CRYPT_ENAB	yes
+-PASS_MAX_DAYS	1235
+-PASS_MIN_DAYS	1236
+-PASS_WARN_AGE	1237
+-UID_MIN		1238
++PASS_MAX_DAYS	2235
++PASS_MIN_DAYS	2236
++PASS_WARN_AGE	2237
++UID_MIN		2238
+ # Last value wins
+-UID_MIN		1239
+-SHA_CRYPT_MIN_ROUNDS	1240
+-SHA_CRYPT_MAX_ROUNDS	1241
++UID_MIN		2239
++SHA_CRYPT_MIN_ROUNDS	2240
++SHA_CRYPT_MAX_ROUNDS	2241
+diff --git a/tests/config_test.c b/tests/config_test.c
+index 9bf043f..f5b1a45 100644
+--- a/tests/config_test.c
++++ b/tests/config_test.c
+@@ -106,21 +106,21 @@ main(int argc, char *argv[])
+ 	lu_end(ctx);
+ 
+ 	ctx = start(argv[1], "libuser_import.conf");
+-	verify_var(ctx, "groupdefaults/" LU_GIDNUMBER, "1234",
++	verify_var(ctx, "groupdefaults/" LU_GIDNUMBER, "2234",
+ 		   (const char *)NULL);
+ 	verify_var(ctx, "defaults/mailspooldir", "/mail/dir/value",
+ 		   (const char *)NULL);
+ 	verify_var(ctx, "defaults/crypt_style", "md5", (const char *)NULL);
+-	verify_var(ctx, "userdefaults/" LU_SHADOWMAX, "1235",
++	verify_var(ctx, "userdefaults/" LU_SHADOWMAX, "2235",
+ 		   (const char *)NULL);
+-	verify_var(ctx, "userdefaults/" LU_SHADOWMIN, "1236",
++	verify_var(ctx, "userdefaults/" LU_SHADOWMIN, "2236",
+ 		   (const char *)NULL);
+-	verify_var(ctx, "userdefaults/" LU_SHADOWWARNING, "1237",
++	verify_var(ctx, "userdefaults/" LU_SHADOWWARNING, "2237",
+ 		   (const char *)NULL);
+-	verify_var(ctx, "userdefaults/" LU_UIDNUMBER, "1239",
++	verify_var(ctx, "userdefaults/" LU_UIDNUMBER, "2239",
+ 		   (const char *)NULL);
+-	verify_var(ctx, "defaults/hash_rounds_min", "1240", (const char *)NULL);
+-	verify_var(ctx, "defaults/hash_rounds_max", "1241", (const char *)NULL);
++	verify_var(ctx, "defaults/hash_rounds_min", "2240", (const char *)NULL);
++	verify_var(ctx, "defaults/hash_rounds_max", "2241", (const char *)NULL);
+ 	/* From (echo $(($(date -d 'may 1 1980 0:0' +%s) / 24 / 3600))) */
+ 	verify_var(ctx, "userdefaults/" LU_SHADOWEXPIRE, "3773",
+ 		   (const char *)NULL);
+diff --git a/tests/config_test.py b/tests/config_test.py
+index 2d2fd17..30b9233 100644
+--- a/tests/config_test.py
++++ b/tests/config_test.py
+@@ -10,12 +10,12 @@ class Tests(unittest.TestCase):
+     def testGetFirstUnusedUid(self):
+         self.assertEqual(self.a.getFirstUnusedUid(start=LARGE_ID + 100),
+                          LARGE_ID + 100)
+-        self.assertEqual(self.a.getFirstUnusedUid(), 1239)
++        self.assertEqual(self.a.getFirstUnusedUid(), 2239)
+ 
+     def testGetFirstUnusedGid(self):
+         self.assertEqual(self.a.getFirstUnusedGid(start=LARGE_ID + 200),
+                          LARGE_ID + 200)
+-        self.assertEqual(self.a.getFirstUnusedGid(), 1234)
++        self.assertEqual(self.a.getFirstUnusedGid(), 2234)
+ 
+ 
+     def tearDown(self):

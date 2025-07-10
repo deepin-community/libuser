@@ -1,0 +1,18 @@
+From: Boyuan Yang <byang@debian.org>
+Date: Wed, 9 Oct 2019 20:28:49 -0400
+Subject: tests/ldap_test: Explicitly use /bin/bash shabang due to bashism
+
+---
+ tests/ldap_test | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/ldap_test b/tests/ldap_test
+index 3a7bb99..3e74597 100755
+--- a/tests/ldap_test
++++ b/tests/ldap_test
+@@ -1,4 +1,4 @@
+-#! /bin/sh
++#! /bin/bash
+ # Automated LDAP regression tester
+ #
+ # Copyright (c) 2004 Red Hat, Inc. All rights reserved.

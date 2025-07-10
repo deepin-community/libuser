@@ -1,5 +1,345 @@
-template-repository (1.0-1) unstable; urgency=medium
+libuser (1:0.64+git20241106~dfsg-3) unstable; urgency=medium
 
-  * Initial release
+  * QA upload.
+  * Explicitly depend on libcrypt-dev.
+  * Clean generated files. (Closes: #1047515)
+  * Transition dependency pkg-config -> pkgconf.
+  * Verify compliance with policy 4.7.2.
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Helmut Grohne <helmut@subdivi.de>  Sun, 13 Apr 2025 14:50:48 +0200
+
+libuser (1:0.64+git20241106~dfsg-2) unstable; urgency=medium
+
+  * QA upload.
+  * Disable tests. (Closes: #1092349)
+
+ -- Bastian Germann <bage@debian.org>  Thu, 23 Jan 2025 21:51:18 +0100
+
+libuser (1:0.64+git20241106~dfsg-1) unstable; urgency=medium
+
+  * QA upload.
+  * New upstream snapshot.
+    + Fix obsolete usage of removed Python standard library. (Closes: #1084569)
+
+ -- Boyuan Yang <byang@debian.org>  Thu, 02 Jan 2025 21:21:18 -0500
+
+libuser (1:0.64~dfsg-2) unstable; urgency=medium
+
+  * QA upload.
+  * Orphan the package. (See #1064872)
+
+  [ Samuel Thibault ]
+  * debian/libuser1.symbols: Generalize arch conditions into linux-any, thus
+    adding hurd-amd64 support.
+
+ -- Boyuan Yang <byang@debian.org>  Mon, 26 Feb 2024 19:33:31 -0500
+
+libuser (1:0.64~dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/patches/bpo: Drop merged patches.
+  * debian/control: Bump Standards-Version to 4.6.2.
+
+ -- Boyuan Yang <byang@debian.org>  Mon, 30 Jan 2023 23:16:25 -0500
+
+libuser (1:0.63~dfsg-5) unstable; urgency=high
+
+  * debian/patches/bpo: Backport upstream trunk till 2022-09-23.
+    + bpo/mr55/0015-Correct-popt-memory-handling.patch: Fix compatibility
+      with libpopt and testsuite failure. (Closes: #1022344)
+  * debian/control: Bump Standards-Version to 4.6.1.
+
+ -- Boyuan Yang <byang@debian.org>  Sun, 20 Nov 2022 15:32:50 -0500
+
+libuser (1:0.63~dfsg-4) unstable; urgency=medium
+
+  * debian/control: Mark package python3-libuser as Multi-Arch: same.
+  * debian/rules:
+    + Force LC_ALL to be C.UTF-8. This circumvents FTBFS
+      during reproducible-builds test since libuser does not support
+      non-UTF-8 environment (e.g., ANSI_X3.4-1968).
+
+ -- Boyuan Yang <byang@debian.org>  Wed, 20 Oct 2021 12:00:54 -0400
+
+libuser (1:0.63~dfsg-3) unstable; urgency=medium
+
+  * Upload to unstable.
+    + Really closes: #994595.
+
+ -- Boyuan Yang <byang@debian.org>  Sat, 09 Oct 2021 21:08:42 -0400
+
+libuser (1:0.63~dfsg-3~exp1) experimental; urgency=medium
+
+  * debian/control: Add missing dep: libuser1-dev -> libglib2.0-dev.
+    (Closes: #994595)
+  * Enable SELinux on linux platforms. (Closes: #965056)
+  * debian/libuser1.symbols: Refresh symbols with SELinux.
+
+ -- Boyuan Yang <byang@debian.org>  Sat, 18 Sep 2021 11:30:59 -0400
+
+libuser (1:0.63~dfsg-2) unstable; urgency=medium
+
+  * debian/rules: Disallow test failure.
+  * Reintroduce python3-libuser package as python 3 binding.
+
+ -- Boyuan Yang <byang@debian.org>  Fri, 17 Sep 2021 22:32:54 -0400
+
+libuser (1:0.63~dfsg-1.1) unstable; urgency=medium
+
+  * debian/control: Add missing dep: libuser1-dev -> libglib2.0-dev.
+    (Closes: #994595)
+  * Enable SELinux support for linux platforms. (Closes: #965056)
+  * debian/libuser1.symbols: Refresh after SELinux is enabled.
+
+ -- Boyuan Yang <byang@debian.org>  Sat, 18 Sep 2021 11:36:41 -0400
+
+libuser (1:0.63~dfsg-1) unstable; urgency=medium
+
+  * New upstream release. (Closes: #984732)
+    + No longer uses deprecated SELinux headers. (Closes: #956354)
+  * debian/control: Mark libuser1 and libuser1-dev as Multi-Arch: same.
+
+ -- Boyuan Yang <byang@debian.org>  Fri, 17 Sep 2021 21:59:16 -0400
+
+libuser (1:0.62~dfsg-1) unstable; urgency=medium
+
+  * Rebuild after Debian 11 release.
+  * Take over package maintenance. (Closes: #984733)
+  * Bump Standards-Version to 4.6.0.
+
+ -- Boyuan Yang <byang@debian.org>  Fri, 17 Sep 2021 15:06:44 -0400
+
+libuser (1:0.62~dfsg-0.4) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * debian/control:
+    + Bump Standards-Version to 4.5.1.
+    + Bump debhelper compat to v13.
+    + Add missing build-dependency gtk-doc-tools. This fixes FTBFS
+      with autoconf 2.70. (Closes: #978859)
+  * debian/rules: Use dh13 syntax.
+
+ -- Boyuan Yang <byang@debian.org>  Tue, 12 Jan 2021 15:55:05 -0500
+
+libuser (1:0.62~dfsg-0.3) unstable; urgency=high
+
+  * Non-maintainer upload.
+  * debian/: Completely drop python2 binding. (Closes: #936929)
+  * debian/rules:
+    - Allow post-build tests to fail. Currently the test depends
+      on obsolete python2, which will not be available in the
+      near future.
+
+ -- Boyuan Yang <byang@debian.org>  Tue, 21 Jan 2020 14:49:33 -0500
+
+libuser (1:0.62~dfsg-0.2) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * debian/control:
+    + Bump Standards-Version to 4.4.1.
+    + Bump debhelper compat to v12.
+    + Update Vcs-* fields to use git packaging repo under Salsa
+      Debian group.
+    + Update Homepage field to point to pagure.io.
+  * debian/watch: Monitor upstream releases on pagure.org.
+  * debian/rules:
+    + Use "dh_missing --fail-missing" instead of "dh_install
+      --fail-missing".
+    + Replace DEB_BUILD_OPTIONS with DEB_BUILD_MAINT_OPTIONS.
+      Solves lintian warning debian-rules-sets-DEB_BUILD_OPTIONS.
+  * debian/libuser1.symbols: Add a Build-Depends-Package field.
+  * debian/patches:
+    + Refresh patches.
+    + Refresh patch about pkg-config to ensure correct
+      cross-build.
+    + Add patch to fix bashism in tests/ldap_test script.
+      (Closes: #530121).
+  * debian/copyright:
+    + Replace defunct fedorahosted URL with pagure.io.
+    + Specifically mention that the project is licensed under
+      LGPL-2+ instead of ambiguous LGPL.
+
+ -- Boyuan Yang <byang@debian.org>  Thu, 10 Oct 2019 16:03:46 -0400
+
+libuser (1:0.62~dfsg-0.1) unstable; urgency=high
+
+  * Non-maintainer upload.
+  * Imported Upstream version 0.62~dfsg.
+    + CVE-2015-3245 (Lack of validation of GECOS field contents) (low/local)
+    + CVE-2015-3246 (Race condition in passwd file update) (high/local)
+    + Closes: #793465
+  * d/copyright:
+    + convert to copyright-format 1.0.
+    + add a Files-Excluded field to drop docs/rfc2307.txt from the orig tarball.
+    + add myself to the copyright for the debian part.
+  * Add watch file.
+  * Run wrap-and-sort -ast.
+  * d/control:
+    + add build-dependency on dh-python.
+    + move python-libuser to section python, as it contains python bindings.
+    + bump Standards-Version to 3.9.8, no changes needed.
+    + add Vcs-* fields.
+  * d/patches:
+    + 0002-Try-harder-to-ignore-the-retunrn-of-ftuncate.patch: drop as obsolete.
+    + use-pkg-config-for-python-include: add, otherwise it fails to look up the
+      python headers.
+    + refresh them all.
+  * d/rules:
+    + drop what seems to be useless code.
+    + enable parallel build.
+    + more robust .la removal using find(1).
+    + enable DH_VERBOSE.
+    + enable hardening.
+    + use dh_install --fail-missing.
+  * d/symbols:
+    + rename to d/libuser1.symbols, so it is actually picked up and used.
+    + update: add new symbols that have been there since at least 1:0.60~dfsg.
+  * d/libuser.install: install /etc/libuser.conf.  LP: #1387274
+
+ -- Mattia Rizzolo <mattia@debian.org>  Fri, 27 May 2016 12:56:43 +0000
+
+libuser (1:0.60~dfsg-1.2) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Revert previous upload, does not solve the root cause.
+  * Rename lid to libuser-lid, as there are no users in debian packages of
+    that command.  lid from id-util's is used by seascope. (Closes:
+    #748728)
+
+ -- Dimitri John Ledkov <dimitri.j.ledkov@linux.intel.com>  Mon, 29 Dec 2014 20:37:14 +0000
+
+libuser (1:0.60~dfsg-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Add Conflict: id-utils to libuser (closes: #748728).
+  * Lower the priority of binary package libuser to 'extra' to have the
+    Conflicts: id-utils in compliance with Debian Policy 2.5 ('optional
+    packages should not conflict with each other').
+
+ -- Micha Lenk <micha@debian.org>  Tue, 09 Dec 2014 22:11:03 +0000
+
+libuser (1:0.60~dfsg-1) unstable; urgency=low
+
+  * complete repackaging (Closes: #670663).
+  * New upstream release (Closes: #705690).
+  * Remove Conflict with python2.3-libuser that was never in a stable release.
+  * Standard version 3.9.5.
+
+ -- Tzafrir Cohen <tzafrir@debian.org>  Mon, 28 Apr 2014 11:03:38 +0300
+
+libuser (1:0.56.9.dfsg.1-1.2) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Remove references to other libraries from dependency_libs field
+    Closes: #620594
+
+ -- Luk Claes <luk@debian.org>  Thu, 02 Jun 2011 18:27:14 +0200
+
+libuser (1:0.56.9.dfsg.1-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix CVE-2011-0002
+    Mark the LDAP default password value as encrypted
+    Patch taken from libuser-0.56.18-3.fc14.src.rpm
+    Add 02libuser-0.56.18-default-pw.dpatch
+    Closes: 610034
+  * Fix binary-or-shlib-defines-rpath
+
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Wed, 09 Feb 2011 11:22:30 +1100
+
+libuser (1:0.56.9.dfsg.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Ghe Rivero <ghe@debian.org>  Fri, 02 May 2008 16:01:50 +0200
+
+libuser (1:0.56.8.dfsg.1-1) unstable; urgency=low
+
+  * New upstream release
+  * New download homepage at copyright file
+  * Lintian clean: copyright-without-copyright-notice
+
+ -- Ghe Rivero <ghe@debian.org>  Tue, 11 Mar 2008 17:40:21 +0100
+
+libuser (1:0.56.7.dfsg.1-2) unstable; urgency=low
+
+  * libuser1-dev depends on libuser1 (Closes: #464681)
+  * python-libuser section admin
+
+ -- Ghe Rivero <ghe@debian.org>  Sat,  9 Feb 2008 00:23:21 +0100
+
+libuser (1:0.56.7.dfsg.1-1) unstable; urgency=low
+
+  * Removed non-free RFC-2307 doc. (Closes: #393394)
+  * Some lintian cleans:
+    - debian-rules-ignores-make-clean-error
+    - python-package-should-be-section-python python-libuser
+
+ -- Ghe Rivero <ghe@debian.org>  Mon,  4 Feb 2008 14:40:27 +0100
+
+libuser (1:0.56.7-2) unstable; urgency=low
+
+  * Updated watch file... again! (Closes: #462826)
+  * debian/control: updated python-libuser override section
+
+ -- Ghe Rivero <ghe@debian.org>  Mon, 28 Jan 2008 00:31:48 +0100
+
+libuser (1:0.56.7-1) unstable; urgency=low
+
+  * New upstream release
+  * Updated watch file (Closes: #449980) and uupdate script
+  * Merged patch from Ubuntu (Closes: #426568)
+  * Bumps Standards-Version to 3.7.3
+
+ -- Ghe Rivero <ghe@debian.org>  Wed, 16 Jan 2008 10:41:07 +0100
+
+libuser (1:0.54.6-2.1.dfsg.2-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload
+  * debian/control: updated maintainer email address
+  * Fixed "Source package contains non-free IETF RFC/I-D's", closes: #393394
+
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Tue, 18 Sep 2007 18:13:38 +1000
+
+libuser (1:0.54.6-2.1.dfsg.1-1.2) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Moved all manpages of commands in /usr/sbin/ from section 1 to
+    section 8 (Closes: #404020).
+  * Added autotools-dev as build-dependency.
+
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Thu, 28 Dec 2006 19:18:14 +1100
+
+libuser (1:0.54.6-2.1.dfsg.1-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Update package to the last python policy (Closes: 380854):
+    + build for all python versions.
+    + use python-support.
+  * Bump Standards-Verstion to 3.7.2.
+
+ -- Pierre Habouzit <madcoder@debian.org>  Sun,  3 Sep 2006 21:58:15 +0200
+
+libuser (1:0.54.6-2.1.dfsg.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Ghe Rivero <ghe@upsa.es>  Mon, 31 Jul 2006 17:27:39 +0200
+
+libuser (0.54.dfsg.1-1) unstable; urgency=low
+
+  * New upstream release, Closes #331611
+
+ -- Ghe Rivero <ghe@upsa.es>  Fri, 30 Sep 2005 16:22:04 +0200
+
+libuser (0.53.8.dfsg.1-1) unstable; urgency=low
+
+  * Removed non-free RFC-2307 document from source tarball.
+
+ -- Ghe Rivero <ghe@upsa.es>  Mon,  1 Aug 2005 00:59:30 +0200
+
+libuser (0.53.8-1) unstable; urgency=low
+
+  * Initial Release, closes: #302312
+
+ -- Ghe Rivero <ghe@upsa.es>  Mon, 27 Jun 2005 13:31:01 +0200
