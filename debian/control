@@ -1,15 +1,84 @@
-Source: template-repository
-Section: unknown
+Source: libuser
+Section: admin
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Build-Depends:
+ bison,
+ cpio,
+ debhelper-compat (= 13),
+ dh-sequence-python3,
+ groff,
+ gtk-doc-tools,
+ libcrypt-dev,
+ libglib2.0-dev,
+ libpam0g-dev,
+ libselinux-dev [linux-any],
+ libpopt-dev,
+ libpython3-dev,
+ linuxdoc-tools,
+ pkgconf,
+ python3,
+Standards-Version: 4.7.2
+Homepage: https://pagure.io/libuser/
+Vcs-Git: https://salsa.debian.org/debian/libuser.git
+Vcs-Browser: https://salsa.debian.org/debian/libuser
 
-Package: template-repository
+Package: libuser
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: user and group account administration library - utilities
+ The libuser library implements a standardized interface for manipulating
+ and administering user and group accounts.  The library uses pluggable
+ back-ends to interface to its data sources.
+ .
+ Sample applications modeled after those included with the shadow password
+ suite are included: lchsh, lchfn, lid, lnewusers, lgroupadd, luseradd,
+ lgroupdel, luserdel, lusermod, lgroupmod, lchage and lpasswd.
+
+Package: python3-libuser
+Section: python
+Architecture: any
+Multi-Arch: same
+Depends:
+ ${python3:Depends},
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: user and group account administration library - python3 bindings
+ The libuser library implements a standardized interface for manipulating
+ and administering user and group accounts.  The library uses pluggable
+ back-ends to interface to its data sources.
+ .
+ This package contains the Python 3 bindings of the library.
+
+Package: libuser1
+Architecture: any
+Multi-Arch: same
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Section: libs
+Description: user and group account administration library - shared libraries
+ The libuser library implements a standardized interface for manipulating
+ and administering user and group accounts.  The library uses pluggable
+ back-ends to interface to its data sources.
+ .
+ This package contains the shared library itself.
+
+Package: libuser1-dev
+Architecture: any
+Multi-Arch: same
+Depends:
+ libcrypt-dev,
+ libglib2.0-dev,
+ libuser1 (= ${binary:Version}),
+ ${misc:Depends},
+ ${shlibs:Depends},
+Section: libdevel
+Description: user and group account administration library - development files
+ The libuser library implements a standardized interface for manipulating
+ and administering user and group accounts.  The library uses pluggable
+ back-ends to interface to its data sources.
+ .
+ This package contains the development headers and data.

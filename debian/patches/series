@@ -1,0 +1,2 @@
+0003-adapt-test-to-pbuilder-that-uses-UID-1234.patch
+0004-tests-ldap_test-Explicitly-use-bin-bash-shabang-due-.patch

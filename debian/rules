@@ -1,4 +1,46 @@
 #!/usr/bin/make -f
+# -*- makefile -*-
+# Uncomment this to turn on verbose mode.
+# export DH_VERBOSE=1
+
+# see FEATURE AREAS in dpkg-buildflags(1)
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# see ENVIRONMENT in dpkg-buildflags(1)
+# package maintainers to append CFLAGS
+#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+# package maintainers to append LDFLAGS
+export DEB_LDFLAGS_MAINT_APPEND =
+
+DPKG_EXPORT_BUILDTOOLS = 1
+include /usr/share/dpkg/default.mk
+
+ifeq (linux,$(DEB_HOST_ARCH_OS))
+ENABLE_SELINUX = --with-selinux
+else
+ENABLE_SELINUX =
+endif
+
+# Force UTF-8 environment; fixes FTBFS
+# Otherwise the following error may occur:
+#     import libuser
+# NotImplementedError: libuser does not support non-UTF-8 locales with Python 3 (currently using ANSI_X3.4-1968)
+export LC_ALL=C.UTF-8
 
 %:
 	dh $@
+
+execute_before_dh_autoreconf:
+	./autogen.sh
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+	    --program-transform-name="s/lid/libuser-lid/" \
+	    --with-python=yes \
+	    $(ENABLE_SELINUX)
+
+# Disable because there are crypt_r / crypt module imports
+override_dh_auto_test:
+
+execute_after_dh_auto_install:
+	find . -name '*.la' -delete
